@@ -12,12 +12,31 @@ class App extends Component {
       data: data
     }
   }
-  
+
+  cardTitle = () => {
+    const cardTitle = this.state.data.methods.map(methods => methods.name)
+    return cardTitle
+  }
+
+  cardDesc = () => {
+    const cardDesc = this.state.data.methods.map(methods => methods.description)
+    return cardDesc
+  }
+
+  cardTags = () => {
+    const cardTags = this.state.data.methods.map(methods => methods.tags)
+    return cardTags
+  }
+
   render() {
     return (
       <div className="App">
         <h1>JS Flash!</h1>
-        <Card/>
+        <Card
+          cardTitle = {this.cardTitle}
+          cardDesc = {this.cardDesc}
+          cardTags = {this.cardTags}
+        />
       </div>
     )
   }
