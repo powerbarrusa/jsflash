@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import Card from './components/card'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import data from './data'
+// import data from './data'
 
 class App extends Component {
 
   constructor(){
     super()
     this.state = {
-      data: data,
+      data: [],
       hasCard: false,
       name: "",
       description: "",
@@ -17,14 +17,25 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    fetch("http://localhost:3001")
+    .then(data => data.json())
+      .then(JSONdata => {
+        console.log(JSONdata)
+        this.setState({
+          data: JSONdata
+        })
+      })
+    }
+
   getRandom (max) {
     const min = 0
     return Math.floor(Math.random() * (max - min)) + min
   }
 
   generateCard = () => {
-    const randomIndex = this.getRandom(this.state.data.methods.length)
-      const randomCard = this.state.data.methods[randomIndex]
+    const randomIndex = this.getRandom(this.state.data.length)
+      const randomCard = this.state.data[randomIndex]
       this.setState({
         hasCard: true,
         name: randomCard.name,
