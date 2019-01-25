@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Card from './card'
+import Card from './components/card'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import data from './data'
@@ -9,34 +9,41 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      data: data
+      data: data,
+      hasCard: false,
+      name: "",
+      description: "",
+      example: ""
     }
   }
 
-  cardTitle = () => {
-    const cardTitle = this.state.data.methods.map(methods => methods.name)
-    return cardTitle
+  getRandom (max) {
+    const min = 0
+    return Math.floor(Math.random() * (max - min)) + min
   }
 
-  cardDesc = () => {
-    const cardDesc = this.state.data.methods.map(methods => methods.description)
-    return cardDesc
-  }
-
-  cardTags = () => {
-    const cardTags = this.state.data.methods.map(methods => methods.tags)
-    return cardTags
-  }
+  generateCard = () => {
+    const randomIndex = this.getRandom(this.state.data.methods.length)
+      const randomCard = this.state.data.methods[randomIndex]
+      this.setState({
+        hasCard: true,
+        name: randomCard.name,
+        description: randomCard.description,
+        example: randomCard.example
+      })
+    }
 
   render() {
     return (
       <div className="App">
         <h1>JS Flash!</h1>
+        {this.state.hasCard ?
         <Card
-          cardTitle = {this.cardTitle}
-          cardDesc = {this.cardDesc}
-          cardTags = {this.cardTags}
-        />
+          name = {this.state.name}
+          description = {this.state.description}
+          example = {this.state.example}
+        /> : ""}
+        <button type="button" onClick={this.generateCard} className="btn btn-primary">Generate New Concept</button>
       </div>
     )
   }
