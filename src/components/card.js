@@ -5,11 +5,9 @@ const Card = (props) => {
   return (
   <div className="container">
     <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">{`Method Name: ${props.name}`}</h5>
+        <h5 className="card-header">{`Method Name: ${props.name}`}</h5>
         <p className="card-text">{`Method Description: ${props.description}`}</p>
         <h4 className="card-title">{`Method Example: ${props.example}`}</h4>
-      </div>
     </div>
   </div>
   )

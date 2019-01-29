@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3001")
+    fetch("http://localhost:3000")
     .then(data => data.json())
       .then(JSONdata => {
         console.log(JSONdata)
@@ -54,6 +54,13 @@ class App extends Component {
           description = {this.state.description}
           example = {this.state.example}
         /> : ""}
+        <form>
+          <label>
+            Your Answer:
+            <input type="text" answer="answer" />
+          </label>
+          <input type="submit" value="Submit" className="btn btn-secondary" />
+        </form>
         <button type="button" onClick={this.generateCard} className="btn btn-primary">Generate New Concept</button>
       </div>
     )
