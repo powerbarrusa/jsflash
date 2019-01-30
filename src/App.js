@@ -44,6 +44,11 @@ class App extends Component {
       })
     }
 
+  answerCheck = (event) => {
+    event.preventDefault()
+    console.log("Answer!")
+  }
+
   render() {
     return (
       <div className="App">
@@ -59,7 +64,7 @@ class App extends Component {
             Your Answer:
             <input type="text" answer="answer" />
           </label>
-          <input type="submit" value="Submit" className="btn btn-secondary" />
+          <input type="submit" value="Submit" className="btn btn-secondary" onClick={this.answerCheck}/>
         </form>
         <button type="button" onClick={this.generateCard} className="btn btn-primary">Generate New Concept</button>
       </div>
