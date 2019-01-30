@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000")
+    fetch("https://salty-tor-37309.herokuapp.com")
     .then(data => data.json())
       .then(JSONdata => {
         console.log(JSONdata)
