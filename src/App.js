@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Card from './components/card'
+import AddCard from './components/editfields'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import data from './data'
@@ -13,7 +14,9 @@ class App extends Component {
       hasCard: false,
       name: "",
       description: "",
-      example: ""
+      example: "",
+      correctAnswer: false,
+      newCard: false
     }
   }
 
@@ -40,14 +43,27 @@ class App extends Component {
         hasCard: true,
         name: randomCard.name,
         description: randomCard.description,
-        example: randomCard.example
+        example: randomCard.example,
+        correctAnswer: false
       })
     }
-
-  answerCheck = (event) => {
+    
+  myAnswer = (event) => {
     event.preventDefault()
-    console.log("Answer!")
+    if (event.target[0].value === this.state.name){
+      this.setState({
+        correctAnswer: true
+      })
+    }
   }
+
+  addCard = () => {
+    return this.state.newCard ? <AddCard/> : null
+  }
+
+  cardEditMode = () => {
+    this.setState({newCard: !this.state.newCard})
+  } 
 
   render() {
     return (
@@ -59,14 +75,16 @@ class App extends Component {
           description = {this.state.description}
           example = {this.state.example}
         /> : ""}
-        <form>
+        <form onSubmit={this.myAnswer}>
           <label>
             Your Answer:
             <input type="text" answer="answer" />
           </label>
-          <input type="submit" value="Submit" className="btn btn-secondary" onClick={this.answerCheck}/>
+          <input type="submit" value={this.state.correctAnswer ? "You got it!": "Submit"} className={this.state.correctAnswer ? "btn btn-success" : "btn btn-secondary"} />
         </form>
-        <button type="button" onClick={this.generateCard} className="btn btn-primary">Generate New Concept</button>
+        <button type="button" onClick={this.generateCard} className="btn btn-primary" id="randomCard">Generate New Concept</button>
+        <p><button className="btn btn-warning" type="button" id="addCard" onClick={this.cardEditMode}>Add New Card</button></p>
+        {this.addCard()}
       </div>
     )
   }
