@@ -8,7 +8,7 @@ const Card = (props) => {
       <p className="card-text">{`Method Description: ${props.description}`}</p>
       <h4 className="card-title">{`Method Example: ${props.example}`}</h4>
         <div>
-          <button type="button" class="btn btn-danger d-flex justify-content-start">Delete Card</button>
+          <button type="button" className="btn btn-danger d-flex justify-content-start" onClick={props.deleteCard} >Delete Card</button>
         </div>
     </div>
   </div>

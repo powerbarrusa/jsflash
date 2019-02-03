@@ -31,6 +31,30 @@ class App extends Component {
       })
     }
 
+  updates = (id, command, prop, value) => {
+    let message = {
+      messageIds: [id],
+      command: command
+    }
+      fetch("http://localhost:3000/", {
+        method: "PATCH",
+        body: JSON.stringify(message),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        }
+      })
+    }
+
+  deleteCard = () => {
+    const removal = this.state.data.filter(card => card.name !== this.state.name)
+    window.alert("removed card!")
+    console.log(this.state.name)
+    this.setState({
+      data: removal
+    })
+  }
+
   getRandom (max) {
     const min = 0
     return Math.floor(Math.random() * (max - min)) + min
@@ -74,6 +98,7 @@ class App extends Component {
           name = {this.state.name}
           description = {this.state.description}
           example = {this.state.example}
+          deleteCard={this.deleteCard}
         /> : ""}
         <form onSubmit={this.myAnswer}>
           <label>
