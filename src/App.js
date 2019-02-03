@@ -108,7 +108,7 @@ class App extends Component {
           <input type="submit" value={this.state.correctAnswer ? "You got it!": "Submit"} className={this.state.correctAnswer ? "btn btn-success" : "btn btn-secondary"} />
         </form>
         <button type="button" onClick={this.generateCard} className="btn btn-primary" id="randomCard">Generate New Concept</button>
-        <p><button className="btn btn-warning" type="button" id="addCard" onClick={this.cardEditMode}>Add New Card</button></p>
+        <p><button className="btn btn-dark" type="button" id="addCard" onClick={this.cardEditMode}>Add New Card</button></p>
         {this.addCard()}
       </div>
     )
